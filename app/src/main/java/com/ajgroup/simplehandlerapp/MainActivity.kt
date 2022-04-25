@@ -16,22 +16,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val handler = object : Handler(Looper.getMainLooper()) {
-            override fun handleMessage(msg: Message) {
-                val message = msg.obj as String
-                binding.helloWorld.text = message
-            }
+        var c = Runnable {
+
+            binding.tvView.setText("Im Running Now")
         }
-       binding.btnOke.setOnClickListener{
-           Thread(Runnable {
-               fun run(){
-               val text = binding.helloWorld.setText("Aldi Dwi Ferdian")
-               val msg = Message.obtain()
-               msg.obj = text
-               msg.setTarget(handler)
-               msg.sendToTarget()
-               }
-           }).start()
-       }
+
+        var hand = Handler()
+        hand.postDelayed(c, 1000)
     }
 }
